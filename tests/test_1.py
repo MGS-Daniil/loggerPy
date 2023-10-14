@@ -1,4 +1,4 @@
-from main import run_test
+from ..main import run_test
 
 
 def test_1():
