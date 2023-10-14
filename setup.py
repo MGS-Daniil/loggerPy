@@ -10,7 +10,7 @@ requirements = [
 ]
 
 setup(
-    name="logging-tools",
+    name="python-logging-tools",
     version="0.0.1",
     author="Daniil10295",
     author_email="chernyak.daniil.2010@gmail.com",
