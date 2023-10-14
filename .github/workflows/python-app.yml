@@ -13,7 +13,8 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  test:
+    name: tests a python app
     runs-on: ubuntu-latest
 
     steps:
@@ -35,5 +36,13 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        python main.py -git
+        python src/main.py -git
         pytest
+
+    - name: Build binary wheel and a source tarball
+      run: python src/setup.py sdist
+
+    - name: Publish to PyPi
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        password: ${{ secrets.pypi_password }}

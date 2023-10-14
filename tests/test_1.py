@@ -11,5 +11,5 @@ def import_tests():
 
 def test_1():
     import_tests()
-    from main import run_test
-    assert run_test() is True
+    from src.main import _run_test
+    assert _run_test() is True
