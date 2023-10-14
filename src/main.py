@@ -42,5 +42,9 @@ class Logger:
 
 
 # GitHub actions and tests
-if sys.argv.count("-git") > 0:
+def git_path_loader():
     sys.path.append(__file__.rstrip("main.py"))
+
+
+if sys.argv.count("-git") > 0:
+    git_path_loader()
