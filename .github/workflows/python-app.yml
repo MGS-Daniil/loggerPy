@@ -40,7 +40,7 @@ jobs:
 #        pytest
 
     - name: Build binary wheel and a source tarball
-      run: python src/setup.py sdist
+      run: python setup.py sdist
 
     - name: Publish to PyPi
       uses: pypa/gh-action-pypi-publish@release/v1
