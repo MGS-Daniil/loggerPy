@@ -44,13 +44,3 @@ class Logger:
 # GitHub actions and tests
 if sys.argv.count("-git") > 0:
     sys.path.append(__file__.rstrip("main.py"))
-
-
-def _run_test() -> bool:
-    return False
-    try:
-        print("")
-        Logger("test", logging.INFO)
-        return True
-    except Exception:
-        return False
