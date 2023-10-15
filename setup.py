@@ -1,17 +1,15 @@
 from setuptools import setup, find_packages
 
-long_description = """
-logging tools package\n
-this package simplifies logging in python
-"""
-
 requirements = [
     "logging",
 ]
 
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
 setup(
     name="python-logging-tools",
-    version="0.0.3",
+    version="0.0.4",
     author="Daniil10295",
     author_email="chernyak.daniil.2010@gmail.com",
     url="https://www.youtube.com/channel/UCWNjclaL2HQ5gDVayqhNEfw",
