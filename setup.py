@@ -4,12 +4,14 @@ requirements = [
     "logging",
 ]
 
+_version = "0.0.3"
+
 with open(__file__.rstrip("setup.py") + "desc.rst", "r") as fh:
     long_description = fh.read()
 
 setup(
     name="python-logging-tools",
-    version="0.0.3",
+    version=_version,
     author="Daniil10295",
     author_email="chernyak.daniil.2010@gmail.com",
     url="https://www.youtube.com/channel/UCWNjclaL2HQ5gDVayqhNEfw",
