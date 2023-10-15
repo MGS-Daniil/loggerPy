@@ -4,7 +4,7 @@ requirements = [
     "logging",
 ]
 
-with open("README.rsd", "r") as fh:
+with open(__file__.rstrip("setup.py") + "desc.rst", "r") as fh:
     long_description = fh.read()
 
 setup(
@@ -23,5 +23,4 @@ setup(
     ],
     install_requires=requirements,
     entry_points={"console_scripts": ["MGS-Daniil = python_logging_tools.main:main"]},
-
 )
