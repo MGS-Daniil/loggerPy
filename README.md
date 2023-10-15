@@ -1,5 +1,6 @@
-![PyPI - Version](https://img.shields.io/pypi/v/python-logging-tools)
-![GitHub Workflow Status (with event)](https://github.com/MGS-Daniil/python-logging-tools/actions/workflows/python-app.yml/badge.svg)
+![PyPI - Version](https://badge.fury.io/py/python-logging-tools.svg)
+![GitHub Workflow Status](https://github.com/MGS-Daniil/python-logging-tools/actions/workflows/python-app.yml/badge.svg)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/python-logging-tools)
 # python logging tools
 python package for logging
 

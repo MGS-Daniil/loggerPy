@@ -5,7 +5,8 @@ import logging
 logging.basicConfig(level=logging.INFO, format="[%(name)s]> %(levelname)s - %(message)s")
 
 __all__ = ["LoggingTools",
-           "ERROR", "WARNING", "INFO", "DEBUG", "CRITICAL",]
+           "ERROR", "WARNING", "INFO", "DEBUG", "CRITICAL",
+           "_run_test"]
 
 
 class LoggingTools:
@@ -24,7 +25,7 @@ class LoggingTools:
             )
         if level is None:
             level = logging.INFO
-        object_ = super().__new__(cls, name, level)
+        object_ = super().__init__(cls, name, level, *args, **kwargs)
         return object_
 
     def __init__(self,
@@ -83,3 +84,17 @@ def git_path_loader():
 
 if sys.argv.count("-git") > 0:
     git_path_loader()
+
+
+def _run_test() -> bool:
+    try:
+        print("")
+        log_test = LoggingTools(name="test", level=INFO)
+        log_test.debug("Test Debug")
+        log_test.info("Test Info")
+        log_test.warning("Test Warning")
+        log_test.error("Test Error")
+        log_test.critical("Test Critical")
+        return True
+    except Exception:
+        return False
