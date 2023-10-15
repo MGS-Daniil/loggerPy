@@ -11,7 +11,7 @@ requirements = [
 
 setup(
     name="python-logging-tools",
-    version="0.0.2",
+    version="0.0.3",
     author="Daniil10295",
     author_email="chernyak.daniil.2010@gmail.com",
     url="https://www.youtube.com/channel/UCWNjclaL2HQ5gDVayqhNEfw",
@@ -24,5 +24,6 @@ setup(
         "Operating System :: OS Independent",
     ],
     install_requires=requirements,
-    entry_points={"console_scripts": ["MGS-Daniil = src.main:main"]},
+    entry_points={"console_scripts": ["MGS-Daniil = python_logging_tools.main:main"]},
+
 )

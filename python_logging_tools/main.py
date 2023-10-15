@@ -3,6 +3,7 @@ import logging
 
 logging.basicConfig(level=logging.INFO)
 
+__all__ = ["Logger"]
 
 class Logger:
     name: str | None
