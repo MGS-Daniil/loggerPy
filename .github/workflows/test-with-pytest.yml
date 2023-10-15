@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   test:
-    name: tests and build a python app
+    name: test a python app
     runs-on: ubuntu-latest
 
     steps:
