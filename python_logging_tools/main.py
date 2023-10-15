@@ -1,10 +1,11 @@
-from logging import Logger
+from logging import Logger, ERROR, WARNING, INFO, DEBUG, CRITICAL
 import sys
 import logging
 
 logging.basicConfig(level=logging.INFO, format="[%(name)s]> %(levelname)s - %(message)s")
 
-__all__ = ["LoggingTools"]
+__all__ = ["LoggingTools",
+           "ERROR", "WARNING", "INFO", "DEBUG", "CRITICAL",]
 
 
 class LoggingTools:
@@ -14,6 +15,7 @@ class LoggingTools:
     _name: str | None
     level: int | None
     __logger: logging.Logger | None
+    file_handlers: dict = {}
 
     def __new__(cls, name: str, level: int, *args, **kwargs):
         if name is None:
@@ -33,15 +35,17 @@ class LoggingTools:
                  log_format: str | None = "{time} [name]> level - message"):
         self._name = name
         self.level: int = level
+        self.log_format = log_format
         if file is not None:
-            self.to_file = file
-
-            logging.basicConfig(format=log_format, filemode=filemode, filename=file)
+            self.to_file(file=file, mode=filemode)
         self.__logger: Logger = logging.getLogger(self._name)
         self.__logger.setLevel(self.level)
 
-    def to_file(self, file):
-        self.__logger.addHandler(logging.FileHandler(file))
+    def to_file(self, file, mode):
+        if file in self.file_handlers:
+            return
+        self.file_handlers[file] = logging.FileHandler(filename=file, mode=mode)
+        self.__logger.addHandler(self.file_handlers[file])
 
     def debug(self, msg, *args, **kwargs):
         self.__logger.debug(msg)

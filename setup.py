@@ -4,10 +4,10 @@ requirements = [
     "logging",
 ]
 
-_version = "0.0.5"
+_version = "0.0.6"
 
-with open(__file__.rstrip("setup.py") + "desc.rst", "r") as fh:
-    long_description = fh.read()
+with open(__file__.rstrip("setup.py") + "README.md", "r") as f:
+    long_description = f.read()
 
 setup(
     name="python-logging-tools",
@@ -17,6 +17,7 @@ setup(
     url="https://www.youtube.com/channel/UCWNjclaL2HQ5gDVayqhNEfw",
     description="logging package",
     long_description=long_description,
+    long_description_content_type="text/markdown",
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
