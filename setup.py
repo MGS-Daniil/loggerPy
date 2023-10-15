@@ -4,7 +4,7 @@ requirements = [
     "logging",
 ]
 
-_version = "0.0.6"
+_version = "0.0.7"
 
 with open(__file__.rstrip("setup.py") + "README.md", "r") as f:
     long_description = f.read()
