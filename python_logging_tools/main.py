@@ -18,22 +18,12 @@ class LoggingTools:
     __logger: logging.Logger | None
     file_handlers: dict = {}
 
-    def __new__(cls, name: str, level: int, *args, **kwargs):
-        if name is None:
-            raise KeyError(
-                "Logger name cannot be None"
-            )
-        if level is None:
-            level = logging.INFO
-        object_ = super().__init__(cls, name, level, *args, **kwargs)
-        return object_
-
     def __init__(self,
                  name: str,
-                 level: int,
+                 level: int = INFO,
                  file: str | None = None,
                  filemode: str = "a",
-                 log_format: str | None = "{time} [name]> level - message"):
+                 log_format: str = "{time} [name]> level - message"):
         self._name = name
         self.level: int = level
         self.log_format = log_format
@@ -55,22 +45,20 @@ class LoggingTools:
         self.__logger.log(msg=msg, level=level)
 
     def info(self, msg):
-        if self.to_file is True:
-            self.__logger.info(msg)
-        else:
-            self.__log(msg, logging.INFO)
+        """Logs an info message."""
+        self.__log(msg, INFO)
 
     def warning(self, msg):
-        self.warning.__doc__ = 'Logs an warning message.'
-        self.__log(msg, logging.WARNING)
+        """Logs a warning message."""
+        self.__log(msg, WARNING)
 
     def error(self, msg):
-        self.error.__doc__ = 'Logs an error message.'
-        self.__log(msg, logging.ERROR)
+        """Logs an error message."""
+        self.__log(msg, ERROR)
 
     def critical(self, msg):
-        self.critical.__doc__ = 'Logs a critical message.'
-        self.__log(msg, logging.CRITICAL)
+        """Logs a critical message."""
+        self.__log(msg, CRITICAL)
 
     def get_logger(self) -> Logger | None:
         """Returns the logger object"""
@@ -96,5 +84,6 @@ def _run_test() -> bool:
         log_test.error("Test Error")
         log_test.critical("Test Critical")
         return True
-    except Exception:
+    except Exception as e:
+        print("\nError: \n" + str(e))
         return False
