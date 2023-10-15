@@ -4,7 +4,7 @@ requirements = [
     "logging",
 ]
 
-_version = "0.0.3"
+_version = "0.0.5"
 
 with open(__file__.rstrip("setup.py") + "desc.rst", "r") as fh:
     long_description = fh.read()
