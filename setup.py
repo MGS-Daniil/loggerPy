@@ -9,7 +9,7 @@ with open(__file__.rstrip("setup.py") + "desc.rst", "r") as fh:
 
 setup(
     name="python-logging-tools",
-    version="0.0.4",
+    version="0.0.3",
     author="Daniil10295",
     author_email="chernyak.daniil.2010@gmail.com",
     url="https://www.youtube.com/channel/UCWNjclaL2HQ5gDVayqhNEfw",
