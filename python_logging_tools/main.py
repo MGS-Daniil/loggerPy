@@ -1,7 +1,7 @@
 from logging import Logger
 import logging
-from ._log import *
-from ._log import _Log
+from python_logging_tools._log import *
+from python_logging_tools._log import _Log
 
 logging.basicConfig(level=logging.INFO, format="[%(name)s]> %(levelname)s - %(message)s")
 
