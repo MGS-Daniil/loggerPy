@@ -1,7 +1,7 @@
 from logging import Logger
-import sys
 import logging
 from ._log import *
+from ._log import _Log
 
 logging.basicConfig(level=logging.INFO, format="[%(name)s]> %(levelname)s - %(message)s")
 
@@ -52,11 +52,7 @@ class LoggingTools:
 
 # GitHub actions and tests
 def git_path_loader():
-    sys.path.append(__file__.rstrip("main.py"))
-
-
-if sys.argv.count("-git") > 0:
-    git_path_loader()
+    return __file__.rstrip("main.py")
 
 
 def _run_test() -> bool:
