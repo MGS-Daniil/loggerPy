@@ -2,7 +2,6 @@ from logging import Logger
 import sys
 import logging
 from ._log import *
-from ._log import _Log as log_cls
 
 logging.basicConfig(level=logging.INFO, format="[%(name)s]> %(levelname)s - %(message)s")
 
@@ -31,7 +30,7 @@ class LoggingTools:
             self.to_file(file=file, mode=filemode)
         __logger: Logger = logging.getLogger(name)
         __logger.setLevel(level)
-        self.__logger: log_cls = log_cls(__logger)
+        self.__logger: _Log = _Log(__logger)
 
     def to_file(self, file, mode):
         self.__file_handler = logging.FileHandler(filename=file, mode=mode)

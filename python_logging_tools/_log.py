@@ -1,7 +1,7 @@
 from logging import ERROR, WARNING, INFO, DEBUG, CRITICAL, Logger
 from colorama import Fore
 
-__all__ = ["ERROR", "WARNING", "INFO", "DEBUG", "CRITICAL"]
+__all__ = ["ERROR", "WARNING", "INFO", "DEBUG", "CRITICAL", "_Log"]
 
 
 class _Log:
