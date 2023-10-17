@@ -1,12 +1,12 @@
-from logging import Logger, ERROR, WARNING, INFO, DEBUG, CRITICAL
+from logging import Logger
 import sys
 import logging
+from ._log import *
+from ._log import _Log as log_cls
 
 logging.basicConfig(level=logging.INFO, format="[%(name)s]> %(levelname)s - %(message)s")
 
-__all__ = ["LoggingTools",
-           "ERROR", "WARNING", "INFO", "DEBUG", "CRITICAL",
-           "_run_test"]
+__all__ = ["LoggingTools", "_run_test"]
 
 
 class LoggingTools:
@@ -14,9 +14,9 @@ class LoggingTools:
     A class that provides logging functionality.
     """
     _name: str | None
-    level: int | None
     __logger: logging.Logger | None
-    file_handlers: dict = {}
+    __file_handler: logging.FileHandler | None
+    level: int | None
 
     def __init__(self,
                  name: str,
@@ -29,40 +29,26 @@ class LoggingTools:
         self.log_format = log_format
         if file is not None:
             self.to_file(file=file, mode=filemode)
-        self.__logger: Logger = logging.getLogger(self._name)
-        self.__logger.setLevel(self.level)
+        __logger: Logger = logging.getLogger(name)
+        __logger.setLevel(level)
+        self.__logger: log_cls = log_cls(__logger)
 
     def to_file(self, file, mode):
-        if file in self.file_handlers:
-            return
-        self.file_handlers[file] = logging.FileHandler(filename=file, mode=mode)
-        self.__logger.addHandler(self.file_handlers[file])
+        self.__file_handler = logging.FileHandler(filename=file, mode=mode)
+        self.__logger.get_logger().addHandler(self.__file_handler)
 
-    def debug(self, msg, *args, **kwargs):
-        self.__logger.debug(msg)
-
-    def __log(self, msg, level, *args, **kwargs):
-        self.__logger.log(msg=msg, level=level)
-
-    def info(self, msg):
-        """Logs an info message."""
-        self.__log(msg, INFO)
-
-    def warning(self, msg):
-        """Logs a warning message."""
-        self.__log(msg, WARNING)
-
-    def error(self, msg):
-        """Logs an error message."""
-        self.__log(msg, ERROR)
-
-    def critical(self, msg):
-        """Logs a critical message."""
-        self.__log(msg, CRITICAL)
-
-    def get_logger(self) -> Logger | None:
-        """Returns the logger object"""
-        return self.__logger
+    def __getattr__(self, item):
+        methods = {
+            "debug": self.__logger.debug,
+            "info": self.__logger.info,
+            "warning": self.__logger.warning,
+            "error": self.__logger.error,
+            "critical": self.__logger.critical,
+            "get_logger": self.__logger.get_logger
+        }
+        if item in methods:
+            return methods[item]
+        return getattr(self.__logger, item)
 
 
 # GitHub actions and tests

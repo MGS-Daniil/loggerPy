@@ -2,9 +2,10 @@ from setuptools import setup, find_packages
 
 requirements = [
     "logging",
+    "colorama",
 ]
 
-_version = "0.0.7"
+_version = "0.0.8"
 
 with open(__file__.rstrip("setup.py") + "README.md", "r") as f:
     long_description = f.read()
