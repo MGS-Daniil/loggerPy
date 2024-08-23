@@ -9,15 +9,20 @@ python package for logging
 pip install python-logging-tools
 ```
 
-## usage:
-```python
-import python_logging_tools
+> [!IMPORTANT]  
+> the project will be updated soon, but is not recommended for use now!
 
-log = python_logging_tools.LoggingTools("Name", logging.INFO)
+## usage:
+
+```python
+import logging
+import pylogging_tools
+
+log = pylogging_tools.LoggingTools("Name", logging.INFO)
 log.debug("message")
 ```
 output:
-[INFO]> [Name] - message```
+`[INFO]> [Name] - message`
 
 ## package:
 - [x] this package simplifies logging in python

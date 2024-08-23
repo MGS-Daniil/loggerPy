@@ -15,7 +15,7 @@ setup(
     version=_version,
     author="Daniil10295",
     author_email="chernyak.daniil.2010@gmail.com",
-    url="https://www.youtube.com/channel/UCWNjclaL2HQ5gDVayqhNEfw",
+    url="https://github.com/MGS-Daniil",
     description="logging package",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -26,5 +26,5 @@ setup(
         "Operating System :: OS Independent",
     ],
     install_requires=requirements,
-    entry_points={"console_scripts": ["MGS-Daniil = python_logging_tools.main:main"]},
+    entry_points={"console_scripts": ["MGS-Daniil = pylogging_tools.main:main"]},
 )

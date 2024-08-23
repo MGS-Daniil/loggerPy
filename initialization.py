@@ -1,9 +1,9 @@
 import sys
-import python_logging_tools as _
+import pylogging_tools as _
 
 
 def import_():
-    from python_logging_tools.main import git_path_loader as gpl
+    from pylogging_tools.main import git_path_loader as gpl
     sys.path.append(gpl())
 
 

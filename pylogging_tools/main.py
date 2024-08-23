@@ -1,11 +1,11 @@
 from logging import Logger
 import logging
-from python_logging_tools._log import *
-from python_logging_tools._log import _Log
+from pylogging_tools._logger import *
+from pylogging_tools._logger import _Logger
 
-logging.basicConfig(level=logging.INFO, format="[%(name)s]> %(levelname)s - %(message)s")
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(name)s]> %(levelname)s - %(message)s")
 
-__all__ = ["LoggingTools", "_run_test"]
+__all__ = ["LoggingTools"]
 
 
 class LoggingTools:
@@ -30,7 +30,7 @@ class LoggingTools:
             self.to_file(file=file, mode=filemode)
         __logger: Logger = logging.getLogger(name)
         __logger.setLevel(level)
-        self.__logger: _Log = _Log(__logger)
+        self.__logger: _Logger = _Logger(__logger)
 
     def to_file(self, file, mode):
         self.__file_handler = logging.FileHandler(filename=file, mode=mode)
@@ -51,20 +51,3 @@ class LoggingTools:
 
 
 # GitHub actions and tests
-def git_path_loader():
-    return __file__.rstrip("main.py")
-
-
-def _run_test() -> bool:
-    try:
-        print("")
-        log_test = LoggingTools(name="test", level=INFO)
-        log_test.debug("Test Debug")
-        log_test.info("Test Info")
-        log_test.warning("Test Warning")
-        log_test.error("Test Error")
-        log_test.critical("Test Critical")
-        return True
-    except Exception as e:
-        print("\nError: \n" + str(e))
-        return False

@@ -11,5 +11,5 @@ def import_tests():
 
 def test_logging_tools():
     import_tests()
-    from python_logging_tools import _run_test
+    from pylogging_tools import _run_test
     assert _run_test() is True

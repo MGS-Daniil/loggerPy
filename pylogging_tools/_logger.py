@@ -1,10 +1,10 @@
 from logging import ERROR, WARNING, INFO, DEBUG, CRITICAL, Logger
 from colorama import Fore
 
-__all__ = ["ERROR", "WARNING", "INFO", "DEBUG", "CRITICAL", "_Log"]
+__all__ = ["ERROR", "WARNING", "INFO", "DEBUG", "CRITICAL", "_Logger"]
 
 
-class _Log:
+class _Logger:
     def __init__(self, logger: Logger):
         self.__logger = logger
 
