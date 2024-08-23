@@ -5,7 +5,7 @@ requirements = [
     "colorama",
 ]
 
-_version = "0.0.10"
+_version = "0.1.0"
 
 with open(__file__.rstrip("setup.py") + "README.md", "r") as f:
     long_description = f.read()

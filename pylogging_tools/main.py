@@ -1,11 +1,28 @@
-from logging import Logger
+from logging import ERROR, WARNING, INFO, DEBUG, CRITICAL, Logger
+from colorama import Fore
 import logging
-from pylogging_tools._logger import *
-from pylogging_tools._logger import _Logger
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(name)s]> %(levelname)s - %(message)s")
+logging.basicConfig(level=logging.INFO, format="log [%(name)s]> %(levelname)s - %(message)s")
 
-__all__ = ["LoggingTools"]
+__all__ = [
+    "LoggingTools",
+    "ERROR",
+    "WARNING",
+    "INFO",
+    "DEBUG",
+    "CRITICAL",
+]
+
+
+class Filter(logging.Filter):
+    def __init__(self, name):
+        self.name = name
+        super().__init__()
+
+    def filter(self, record):
+        if record.name.startswith("log "):
+            return False
+        return True
 
 
 class LoggingTools:
@@ -22,32 +39,59 @@ class LoggingTools:
                  level: int = INFO,
                  file: str | None = None,
                  filemode: str = "a",
-                 log_format: str = "{time} [name]> level - message"):
+                 log_format: str = "%(asctime)s [%(name)s]> %(levelname)s - %(message)s"):
         self._name = name
         self.level: int = level
-        self.log_format = log_format
+        self.log_format = logging.Formatter(
+            log_format.replace("&time", "%(asctime)s").replace("&name", name).replace("&level",
+                                                                                      "%(levelname)s").replace(
+                "&message", "%(message)s"))
         if file is not None:
-            self.to_file(file=file, mode=filemode)
-        __logger: Logger = logging.getLogger(name)
-        __logger.setLevel(level)
-        self.__logger: _Logger = _Logger(__logger)
+            self.add_file_handler(file=file, mode=filemode)
 
-    def to_file(self, file, mode):
+        # logger settings
+        self.__logger: Logger = logging.getLogger(name)
+        logger_handler = logging.StreamHandler()
+        self.__logger.setLevel(level)
+        self.__logger.addHandler(logger_handler)
+        logger_handler.setFormatter(self.log_format)
+        filter_ = Filter(name)
+        self.__logger.addFilter(filter_)
+
+    def add_file_handler(self, file, mode):
         self.__file_handler = logging.FileHandler(filename=file, mode=mode)
-        self.__logger.get_logger().addHandler(self.__file_handler)
+        self.__logger.addHandler(self.__file_handler)
 
-    def __getattr__(self, item):
-        methods = {
-            "debug": self.__logger.debug,
-            "info": self.__logger.info,
-            "warning": self.__logger.warning,
-            "error": self.__logger.error,
-            "critical": self.__logger.critical,
-            "get_logger": self.__logger.get_logger
-        }
-        if item in methods:
-            return methods[item]
-        return getattr(self.__logger, item)
+    def remove_file_handler(self):
+        self.__logger.removeHandler(self.__file_handler)
+        self.__file_handler = None
 
+    def info(self, msg, color=Fore.LIGHTWHITE_EX):
+        """Logs an info message."""
+        self.__log(color, msg, INFO)
 
-# GitHub actions and tests
+    def debug(self, msg, color=Fore.WHITE):
+        self.__log(color, msg, DEBUG)
+
+    def warning(self, msg, color=Fore.LIGHTYELLOW_EX):
+        """Logs a warning message."""
+        self.__log(color, msg, WARNING)
+
+    def error(self, msg, color=Fore.LIGHTRED_EX):
+        """Logs an error message."""
+        self.__log(color, msg, ERROR)
+
+    def critical(self, msg, color=Fore.RED):
+        """Logs a critical message."""
+        self.__log(color, msg, CRITICAL)
+
+    def __log(self, color, msg, level):
+        self.__logger.log(msg=color + msg + Fore.RESET, level=level)
+
+    def get_logger(self) -> Logger | None:
+        """Returns the logger object"""
+        return self.__logger
+
+    def get_file_handler(self) -> logging.FileHandler | None:
+        """Returns the file handler object"""
+        return self.__file_handler

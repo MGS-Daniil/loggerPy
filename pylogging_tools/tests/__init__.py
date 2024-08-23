@@ -1,13 +1,13 @@
 from .. import *
 
-__all__ = ["git_path_loader", "_run_test"]
+__all__ = ["git_path_loader", "run_test"]
 
 
 def git_path_loader():
     return __file__.rstrip("main.py")
 
 
-def _run_test() -> bool:
+def run_test() -> bool:
     try:
         print("")
         log_test = LoggingTools(name="test", level=INFO)
