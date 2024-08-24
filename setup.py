@@ -8,7 +8,7 @@ requirements = [
 _version = "0.1.0"
 
 with open(__file__.rstrip("setup.py") + "README.md", "r") as f:
-    long_description = f.read()
+    long_description = f.read().replace("> [!WARNING]", "WARNING")
 
 setup(
     name="python-logging-tools",
