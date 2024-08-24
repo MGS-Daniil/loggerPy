@@ -9,7 +9,7 @@ python package for modern logging
 pip install python-logging-tools
 ```
 
-> [!WANING]  
+> [!WARNING]  
 > the project will be updated soon, but is not recommended for use now!
 
 ## usage:
